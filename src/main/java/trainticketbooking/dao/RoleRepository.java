@@ -1,11 +1,11 @@
 package trainticketbooking.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import trainticketbooking.model.Roles;
+import trainticketbooking.model.Role;
 
 
 import java.util.Optional;
 
-public interface RoleRepository extends JpaRepository<Roles, Integer> {
-    Optional<Roles>findByName(String name);
+public interface RoleRepository extends JpaRepository<Role, Integer> {
+    Optional<Role>findByName(String name);
 }

@@ -1,4 +1,4 @@
-package trainticketbooking.security;
+package trainticketbooking.controller;
 
 //import com.jobapplication.example.jobapplication.email.EmailDetails;
 //import com.jobapplication.example.jobapplication.email.EmailService;
@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import trainticketbooking.dao.RoleRepository;
-import trainticketbooking.model.UserEntity;
+import trainticketbooking.dto.AuthResponseDTO;
+import trainticketbooking.dto.LoginDto;
+import trainticketbooking.dto.RegisterDto;
+import trainticketbooking.model.User;
+import trainticketbooking.security.JWTGenerator;
 
 @RestController
 @RequestMapping("/auth")
@@ -53,7 +57,7 @@ public class AuthController {
         if(userRepository.existsByUsername(registerDto.getUsername())){
             return new ResponseEntity<>("Username is taken", HttpStatus.BAD_REQUEST);
         }
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setUsername(registerDto.getUsername());
         user.setEmail(registerDto.getEmail());
         user.setPassword(passwordEncoder.encode((registerDto.getPassword())));

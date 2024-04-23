@@ -1,4 +1,4 @@
-package trainticketbooking.security;
+package trainticketbooking.dto;
 
 import lombok.Data;
 

@@ -2,74 +2,34 @@ package trainticketbooking.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "users")
 @Data
-@Table
-@Entity(name="user")
+@NoArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    String userId;
-    String userName;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
 
-    String userEmail;
-    String userPassword;
-    String userRole;
+    private String username;
 
-//    @ManyToMany
-//    List<Train>userSelectedTrains;
+    private String userEmail;
 
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    private String userPassword;
+//    ManyRole->oneUser
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "roles", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Role role;
 
-    public String getUserId() {
-        return userId;
-    }
+    @ManyToMany
+    private List<Train> trains;
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
-                ", userId='" + userId + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", userRole='" + userRole + '\'' +
-                '}';
-    }
 }

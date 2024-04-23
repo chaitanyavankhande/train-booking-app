@@ -1,71 +1,25 @@
 package trainticketbooking.model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Train {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    String name;
+    String fromLocation;
+    String toLocation;
+    String ticketPrice;
+    String seatsAvailable;
 
-    String trainName;
-    String trainId;
-    String trainFromLocation;
-    String trainToLocation;
-    String trainTicketPrice;
-    String trainSeatsAvailable;
-
-    @Override
-    public String toString() {
-        return "Train{" +
-                "trainName='" + trainName + '\'' +
-                ", trainId='" + trainId + '\'' +
-                ", trainFromLocation='" + trainFromLocation + '\'' +
-                ", trainToLocation='" + trainToLocation + '\'' +
-                ", trainTicketPrice='" + trainTicketPrice + '\'' +
-                ", trainSeatsAvailable='" + trainSeatsAvailable + '\'' +
-                '}';
-    }
-
-    public String getTrainName() {
-        return trainName;
-    }
-
-    public void setTrainName(String trainName) {
-        this.trainName = trainName;
-    }
-
-    public String getTrainId() {
-        return trainId;
-    }
-
-    public void setTrainId(String trainId) {
-        this.trainId = trainId;
-    }
-
-    public String getTrainFromLocation() {
-        return trainFromLocation;
-    }
-
-    public void setTrainFromLocation(String trainFromLocation) {
-        this.trainFromLocation = trainFromLocation;
-    }
-
-    public String getTrainToLocation() {
-        return trainToLocation;
-    }
-
-    public void setTrainToLocation(String trainToLocation) {
-        this.trainToLocation = trainToLocation;
-    }
-
-    public String getTrainTicketPrice() {
-        return trainTicketPrice;
-    }
-
-    public void setTrainTicketPrice(String trainTicketPrice) {
-        this.trainTicketPrice = trainTicketPrice;
-    }
-
-    public String getTrainSeatsAvailable() {
-        return trainSeatsAvailable;
-    }
-
-    public void setTrainSeatsAvailable(String trainSeatsAvailable) {
-        this.trainSeatsAvailable = trainSeatsAvailable;
-    }
+    @ManyToMany
+    List<User> users;
 }

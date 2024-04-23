@@ -1,12 +1,12 @@
-package trainticketbooking.security;
+package trainticketbooking.dto;
+
 import lombok.Data;
-import trainticketbooking.model.Roles;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Data
-public class RegisterDto {
+public class LoginDto {
+    private String id;
     private String username;
     private String email;
 
@@ -19,14 +19,13 @@ public class RegisterDto {
     }
 
     private String password;
-    private List<Roles> roles = new ArrayList<>();
 
-    public List<Roles> getRoles() {
-        return roles;
+    public String getId() {
+        return id;
     }
 
-    public void setRoles(List<Roles> roles) {
-        this.roles = roles;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
