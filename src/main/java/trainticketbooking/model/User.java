@@ -28,8 +28,5 @@ public class User {
     @JoinTable(name = "roles", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Role role;
 
-    @ManyToMany
-    private List<Train> trains;
-
 
 }

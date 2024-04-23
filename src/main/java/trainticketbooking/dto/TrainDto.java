@@ -1,17 +1,19 @@
 package trainticketbooking.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TrainCommandDto {
-    Integer id;
+@Builder
+public class TrainDto {
+    Integer id = null;
     String name;
     String fromLocation;
     String toLocation;
     String ticketPrice;
-    String seatsAvailable;
+    Integer seatsAvailable;
 }

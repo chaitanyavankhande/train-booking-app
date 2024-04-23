@@ -4,7 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import trainticketbooking.dao.TrainRepository;
-import trainticketbooking.dto.TrainCommandDto;
+import trainticketbooking.dto.TrainDto;
 import trainticketbooking.model.Train;
 
 @Service
@@ -12,7 +12,7 @@ import trainticketbooking.model.Train;
 public class AdminService {
     @Autowired
     TrainRepository trainRepository;
-    public Integer createTrain(TrainCommandDto payload) {
+    public Integer createTrain(TrainDto payload) {
         Train train = new Train();
         train.setName(payload.getName());
         train.setFromLocation(payload.getFromLocation());

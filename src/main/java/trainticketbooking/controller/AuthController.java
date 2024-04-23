@@ -1,7 +1,6 @@
 package trainticketbooking.controller;
 
-//import com.jobapplication.example.jobapplication.email.EmailDetails;
-//import com.jobapplication.example.jobapplication.email.EmailService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import trainticketbooking.dao.RoleRepository;
+import trainticketbooking.dao.UserRepository;
 import trainticketbooking.dto.AuthResponseDTO;
 import trainticketbooking.dto.LoginDto;
 import trainticketbooking.dto.RegisterDto;
+import trainticketbooking.model.Role;
 import trainticketbooking.model.User;
 import trainticketbooking.security.JWTGenerator;
 
@@ -30,18 +31,6 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
     private JWTGenerator jwtGenerator;
 
-//    private EmailService emailService;
-
-
-    @Autowired
-//    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JWTGenerator jwtGenerator, EmailService emailService) {
-//        this.authenticationManager = authenticationManager;
-//        this.userRepository = userRepository;
-//        this.roleRepository = roleRepository;
-//        this.passwordEncoder = passwordEncoder;
-//        this.jwtGenerator = jwtGenerator;
-////        this.emailService = emailService;
-//    }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO>login(@RequestBody LoginDto loginDto){
@@ -59,17 +48,17 @@ public class AuthController {
         }
         User user = new User();
         user.setUsername(registerDto.getUsername());
-        user.setEmail(registerDto.getEmail());
-        user.setPassword(passwordEncoder.encode((registerDto.getPassword())));
-//        String role = registerDto.getRoles().getFirst().getName();
-//
-//        Roles roles = roleRepository.findByName(role).get();
-//        user.setRoles(Collections.singletonList(roles));
+        user.setUserEmail(registerDto.getEmail());
+        user.setUserPassword(passwordEncoder.encode((registerDto.getPassword())));
+        String role = registerDto.getRole().getName();
+
+        Role userRole = roleRepository.findByName(role).orElseThrow(
+                EntityNotFoundException::new
+        );
+        user.setRole(userRole);
         System.out.println(user);
         userRepository.save(user);
-//        EmailDetails emailDetails = new EmailDetails(registerDto.getEmail(),"Registration confirmation","Thanks for registering");
-//        System.out.println(emailDetails);
-//        emailService.sendSimpleMail(emailDetails);
+
         return new ResponseEntity<>("User registered success",HttpStatus.OK);
     }
 }

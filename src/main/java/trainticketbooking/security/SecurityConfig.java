@@ -43,16 +43,7 @@ public class SecurityConfig {
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/companies/remove/**").hasAuthority("SUPER_ADMIN")
-                        .requestMatchers("/jobs/post").hasAuthority("ADMIN")
-                        .requestMatchers("/jobs/**").hasAuthority("ADMIN")
-                        .requestMatchers("/alljobs").permitAll()
-                        .requestMatchers("/post/**").hasAuthority("USER")
-                        .requestMatchers("/applications/**").hasAuthority("ADMIN")
-                        .requestMatchers("/allreviews/**").permitAll()
-                        .requestMatchers("/companies/**").hasAuthority("ADMIN")
-                        .requestMatchers("/allcompanies/**").permitAll()
-                        .requestMatchers("/reviews/**").hasAuthority("USER")
+
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
