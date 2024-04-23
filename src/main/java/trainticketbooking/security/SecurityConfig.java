@@ -43,7 +43,8 @@ public class SecurityConfig {
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
-
+                        .requestMatchers("/api/admin/**").hasAnyAuthority("Admin")
+                        .requestMatchers("/api/user/**").hasAnyAuthority("User")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());

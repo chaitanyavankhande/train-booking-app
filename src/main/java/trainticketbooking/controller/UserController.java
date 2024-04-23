@@ -3,6 +3,7 @@ package trainticketbooking.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import trainticketbooking.dto.BookSeatDto;
+import trainticketbooking.dto.BookingQueryDto;
 import trainticketbooking.dto.TrainDto;
 import trainticketbooking.dto.TrainScheduleDto;
 import trainticketbooking.service.UserService;
@@ -20,8 +21,13 @@ public class UserController {
         return userService.getAvailableTrains(payload);
     }
     @PostMapping("/book-train/{trainId}")
-    void bookSeats(@RequestBody BookSeatDto payload) {
-        userService.bookSeats(payload);
+    Integer bookSeats(@RequestBody BookSeatDto payload) {
+        return userService.bookSeats(payload);
+    }
+
+    @GetMapping("/bookings/{id}")
+    BookingQueryDto getBooking(@PathVariable Integer id) {
+        return userService.getBooking(id);
     }
 
 }
